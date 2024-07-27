@@ -12,3 +12,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function playbutton() {
     window.location.href = "/game";
 }
+function homebutton() {
+    window.location.href = "/";
+}

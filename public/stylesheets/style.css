@@ -33,3 +33,7 @@ border:0;
   cursor: pointer;
   width: 100%;
 }
+.openingtitle:hover {
+  cursor: pointer;
+  color:blanchedalmond;
+}
