@@ -7,17 +7,18 @@ body {
   background-color: #5b7fa7;
 }
 .box {
-  width: 85vw;
-  height: 50vw;
+  width: 60vw;
+  height: 25vw;
   border: 1px solid black;
   padding: 10px;
   margin: auto;
   align-items: center;
   background-color: #f2f2f2;
 }
+
 .cookiepic {
-width: 42vw;
-height:42vw;
+width: 24vw;
+height:24vw;
 background-color: rgb(107, 96, 76);
 border:0;
 }
