@@ -1,0 +1,17 @@
+.openingtitle {
+  font-family: "Work Sans", sans-serif;
+  font-style: italic;
+  text-align: center;
+  font-size: 3.5em;
+}
+body {
+  background-color: #5b7fa7;
+}
+.box {
+  width: 85vw;
+  height: 50vw;
+  border: 1px solid black;
+  padding: 10px;
+  margin: auto;
+  align-items: center;
+}
