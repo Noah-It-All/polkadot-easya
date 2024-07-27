@@ -14,10 +14,22 @@ body {
   padding: 10px;
   margin: auto;
   align-items: center;
+  background-color: #f2f2f2;
 }
 .cookiepic {
 width: auto;
 height:auto;
 background-color: rgb(107, 96, 76);
 border:0;
+}
+#play {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5em;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: 1px solid black;
+  cursor: pointer;
+  width: 100%;
 }
