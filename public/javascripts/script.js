@@ -25,7 +25,7 @@ function timer(howmuch) {
       if (count === 0) {
         clearInterval(timer);
         alert('Time is up! Your score is ' + document.getElementById('counter').textContent);
-        window.location.href = "/";
+        location.reload()
       }
     }, 1000);
 }
