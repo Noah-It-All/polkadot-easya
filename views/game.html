@@ -1,18 +1,31 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
     </style>
-  </head>
-  <script src="/javascripts/script.js"></script>
+</head>
 <body>
-  <h1 class="openingtitle" onclick="homebutton()">Cookie Clicker</h1>
-  <div class="box">
-    <button id="cookiebutton"><img class="cookiepic" draggable="false" src="/images/cookie.png"></button>
+    <h1 class="openingtitle" onclick="homebutton()">Cookie Clicker</h1>
+    <div class="box">
+        <button id="cookiebutton"><img class="cookiepic" draggable="false" src="/images/cookie.png" alt="Cookie"></button>
     </div>
-  </div>
-  <h1>Counter: <span id="counter">0</span></h1>
-  <h1>Timer: <span id="timeleft">5</span></h1>
+    <h1>Counter: <span id="counter">0</span></h1>
+    <h1>Timer: <span id="timeleft">5</span></h1>
+
+    <!-- Popup HTML -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2>Time's Up!</h2>
+            <p>Your score is: <span id="final-score">0</span></p>
+            <button id="play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script src="/javascripts/script.js"></script>
 </body>
 </html>
