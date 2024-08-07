@@ -107,3 +107,6 @@ body {
   margin-left: 10px;
   cursor: pointer;
 }
+* {
+  touch-action: manipulation;
+}
