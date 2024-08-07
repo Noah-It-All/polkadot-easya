@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', async (event) => {
     let count = 0;
     let timerStarted = false; // Flag to check if timer has started
     const counterElement = document.getElementById('counter');
@@ -6,11 +6,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const highScoreElement = document.getElementById('highscore');
 
     // Display the high score
-    const highScore = getCookie('highScore');
-    const highScoreName = getCookie('highScoreName');
-    if (highScore && highScoreName) {
-        highScoreElement.textContent = `High Score: ${highScore} by ${highScoreName}`;
-    }
+    await displayHighScore();
 
     incrementButton.addEventListener('click', () => {
         if (!timerStarted) {
@@ -33,50 +29,60 @@ function homebutton() {
 function timer(howmuch) {
     let count = howmuch;
     const timeleft = document.getElementById('timeleft');
+    const incrementButton = document.getElementById('cookiebutton');
     const timer = setInterval(function() {
         count--;
         timeleft.textContent = count;
         if (count === 0) {
             clearInterval(timer);
             const score = parseInt(document.getElementById('counter').textContent, 10);
-            let playerName = prompt('Time is up! Enter your name:');
+            incrementButton.disabled = true; // Disable the cookie button
+
+            // Prompt user for name
+            const playerName = prompt('Time is up! Enter your name to save your score:');
             if (playerName) {
-                checkHighScore(score, playerName);
+                submitScore(score, playerName);
+            } else {
+                alert('Please enter your name to save your score.');
+                resetGame();
             }
-            location.reload();
         }
     }, 1000);
 }
 
-function checkHighScore(score, playerName) {
-    const highScore = getCookie('highScore');
-    if (!highScore || score > parseInt(highScore, 10)) {
-        setCookie('highScore', score, 365);
-        setCookie('highScoreName', playerName, 365);
-        alert(`New high score! ${score} by ${playerName}`);
-    } else {
-        alert(`Your score is ${score}. High score is still ${highScore} by ${getCookie('highScoreName')}`);
+async function submitScore(score, playerName) {
+    await checkHighScore(score, playerName);
+    resetGame();
+}
+
+async function checkHighScore(score, playerName) {
+    const response = await fetch('/highscore');
+    const highScoreData = await response.json();
+    const highScore = highScoreData.score;
+    if (!highScore || score > highScore) {
+        await fetch('/highscore', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ score: score, name: playerName })
+        });
+        displayHighScore();
     }
 }
 
-function setCookie(name, value, days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = `; expires=${date.toUTCString()}`;
-    document.cookie = `${name}=${value || ''}${expires}; path=/`;
+async function displayHighScore() {
+    const response = await fetch('/highscore');
+    const highScoreData = await response.json();
+    const highScoreElement = document.getElementById('highscore');
+    highScoreElement.textContent = `High Score: ${highScoreData.score} by ${highScoreData.name}`;
 }
 
-function getCookie(name) {
-    const nameEQ = `${name}=`;
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
-
-function eraseCookie(name) {
-    document.cookie = `${name}=; Max-Age=-99999999;`;
+function resetGame() {
+    count = 0;
+    timerStarted = false;
+    document.getElementById('counter').textContent = 0;
+    document.getElementById('timeleft').textContent = 5;
+    document.getElementById('cookiebutton').disabled = false; // Re-enable the cookie button
+    location.reload()
 }
