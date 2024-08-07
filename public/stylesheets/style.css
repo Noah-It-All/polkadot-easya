@@ -75,3 +75,35 @@ body {
   cursor: pointer;
 }
 
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#highscore {
+  font-family: "Work Sans", sans-serif;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: white;
+}
+
+#nameInputContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#playerName {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+#nameInputContainer button {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5em;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
